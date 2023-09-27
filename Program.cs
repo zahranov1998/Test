@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Text.Json;
 
 namespace Sample
 {
@@ -6,23 +6,40 @@ namespace Sample
     {
         static void Main(string[] args)
         {
-            Contact u1 = new Contact { FirstName = "Zahra", LastName = "Mohammadi", PhoneNumber = "12345678" };
-            Contact u2 = new Contact { FirstName = "Elham", LastName = "aaaaa", PhoneNumber = "12345678" };
-            Contact u3 = new Contact { FirstName = "Ali", LastName = "Milani", PhoneNumber = "12345678" };
+
+            string f = AppDomain.CurrentDomain.BaseDirectory;
+
+            var path = f + "Files\\Data.json";
 
             var contactBusiness = new ContactBusiness();
 
-            contactBusiness.AddContact(u1);
+            StreamReader sr = new StreamReader(path);
 
-            contactBusiness.AddContact(u2);
+            var z = sr.ReadToEnd();
 
-            contactBusiness.AddContact(u3);
+            sr.Dispose();
+
+            List<Contact> contacts = new List<Contact>();
+
+
+            Contact contact = new Contact();
+
+            if (string.IsNullOrEmpty(z) == false)
+            {
+                contacts = JsonSerializer.Deserialize<List<Contact>>(z);
+            }
+
+            contactBusiness.Contacts = contacts;
+
+            var opt = new JsonSerializerOptions() { WriteIndented = true };
+
+            var strJson = JsonSerializer.Serialize<List<Contact>>(contactBusiness.Contacts, opt);
 
             var exit = "";
 
+
             while (exit.ToLower() != "e")
             {
-
                 Console.WriteLine("Select The Oparation : \n 1.Add Contact \n 2.Show Contacts \n 3.Delete Contact \n 4.Update Contact");
 
                 var a = 0;
@@ -40,8 +57,6 @@ namespace Sample
                 {
                     case 1:
 
-                        Contact contact = new Contact();
-
                         Console.WriteLine("Enter FirstName");
                         contact.FirstName = Console.ReadLine();
 
@@ -51,7 +66,16 @@ namespace Sample
                         Console.WriteLine("Enter PhoneNumber");
                         contact.PhoneNumber = Console.ReadLine();
 
-                        contactBusiness.AddContact(contact);
+                        contacts.Add(contact);
+
+                        strJson = JsonSerializer.Serialize<IList<Contact>>(contacts, opt);
+
+
+                        StreamWriter streamWriter = new StreamWriter(path, false);
+
+                        streamWriter.WriteLine(strJson);
+
+                        streamWriter.Dispose();
 
                         Console.WriteLine("Contact Added Successfully");
 
@@ -59,17 +83,28 @@ namespace Sample
 
                     case 2:
 
-                        foreach (Contact item in contactBusiness.Contacts)
-                        {
-                            Console.WriteLine(item.FirstName);
-                            Console.WriteLine(item.LastName);
-                            Console.WriteLine(item.PhoneNumber);
-                            Console.WriteLine("");
-                        }
+                        sr = new StreamReader(path);
+
+                        z = sr.ReadToEnd();
+
+                        sr.Dispose();
+
+                        Console.WriteLine(z);
 
                         break;
 
                     case 3:
+
+                        sr = new StreamReader(path);
+
+                        z = sr.ReadToEnd();
+
+                        sr.Dispose();
+
+                        if (string.IsNullOrEmpty(z) == false)
+                        {
+                            contacts = JsonSerializer.Deserialize<List<Contact>>(z);
+                        }
 
                         Console.WriteLine("Enter ContactId");
 
@@ -77,7 +112,15 @@ namespace Sample
 
                         try
                         {
-                            contactBusiness.DeleteContact(uId);
+                            contacts.Remove(contacts[uId]);
+
+                            strJson = JsonSerializer.Serialize<IList<Contact>>(contacts, opt);
+
+                            streamWriter = new StreamWriter(path, false);
+
+                            streamWriter.WriteLine(strJson);
+
+                            streamWriter.Dispose();
 
                             Console.WriteLine("Contact Deleted Successfully");
                         }
@@ -100,23 +143,31 @@ namespace Sample
 
                             var value = Console.ReadLine();
 
-                            if(value != "")
-                            contactBusiness.Contacts[uId].FirstName = value;
+                            if (value != "")
+                                contacts[uId].FirstName = value;
 
 
                             Console.WriteLine("Enter LastName");
 
                             value = Console.ReadLine();
 
-                            if(value != "")
-                            contactBusiness.Contacts[uId].LastName = value;
+                            if (value != "")
+                                contacts[uId].LastName = value;
 
                             Console.WriteLine("Enter PhoneNumber");
 
                             value = Console.ReadLine();
 
-                            if(value != "")
-                            contactBusiness.Contacts[uId].PhoneNumber = value;
+                            if (value != "")
+                                contacts[uId].PhoneNumber = value;
+
+                            strJson = JsonSerializer.Serialize<IList<Contact>>(contacts, opt);
+
+                            streamWriter = new StreamWriter(path, false);
+
+                            streamWriter.WriteLine(strJson);
+
+                            streamWriter.Dispose();
 
                             Console.WriteLine("Contact Updated Successfully");
                         }
