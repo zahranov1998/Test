@@ -1,4 +1,4 @@
-    public class User
+    public class Contact
     {
         public string FirstName {get; set;}
 

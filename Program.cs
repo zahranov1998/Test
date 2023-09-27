@@ -6,117 +6,135 @@ namespace Sample
     {
         static void Main(string[] args)
         {
-            User u1 = new User { FirstName = "Zahra", LastName = "Mohammadi", PhoneNumber = "12345678" };
-            User u2 = new User { FirstName = "Elham", LastName = "aaaaa", PhoneNumber = "12345678" };
-            User u3 = new User { FirstName = "Ali", LastName = "Milani", PhoneNumber = "12345678" };
+            Contact u1 = new Contact { FirstName = "Zahra", LastName = "Mohammadi", PhoneNumber = "12345678" };
+            Contact u2 = new Contact { FirstName = "Elham", LastName = "aaaaa", PhoneNumber = "12345678" };
+            Contact u3 = new Contact { FirstName = "Ali", LastName = "Milani", PhoneNumber = "12345678" };
 
-            var userBusiness = new UserBusiness();
+            var contactBusiness = new ContactBusiness();
 
-            userBusiness.AddUser(u1);
+            contactBusiness.AddContact(u1);
 
-            userBusiness.AddUser(u2);
+            contactBusiness.AddContact(u2);
 
-            userBusiness.AddUser(u3);
-
-            //userBusiness.ShowUsers();
+            contactBusiness.AddContact(u3);
 
             var exit = "";
 
             while (exit.ToLower() != "e")
             {
 
-                System.Console.WriteLine("Select The Oparation : \n 1.Add User \n 2.Show Users \n 3.Delete User \n 4.Update User");
+                Console.WriteLine("Select The Oparation : \n 1.Add Contact \n 2.Show Contacts \n 3.Delete Contact \n 4.Update Contact");
 
-                var a = Convert.ToInt32(Console.ReadLine());
+                var a = 0;
+                try
+                {
+                    a = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid data!");
+                    return;
+                }
 
-              
                 switch (a)
                 {
                     case 1:
 
-                        User user = new User();
+                        Contact contact = new Contact();
 
-                        System.Console.WriteLine("Enter FirstName");
-                        user.FirstName = Console.ReadLine();
+                        Console.WriteLine("Enter FirstName");
+                        contact.FirstName = Console.ReadLine();
 
-                        System.Console.WriteLine("Enter LastName");
-                        user.LastName = Console.ReadLine();
+                        Console.WriteLine("Enter LastName");
+                        contact.LastName = Console.ReadLine();
 
-                        System.Console.WriteLine("Enter PhoneNumber");
-                        user.PhoneNumber = Console.ReadLine();
+                        Console.WriteLine("Enter PhoneNumber");
+                        contact.PhoneNumber = Console.ReadLine();
 
-                        userBusiness.AddUser(user);
+                        contactBusiness.AddContact(contact);
 
-                        System.Console.WriteLine("User Added Successfully");
+                        Console.WriteLine("Contact Added Successfully");
 
                         break;
 
                     case 2:
 
-                        foreach (User item in userBusiness.Users)
+                        foreach (Contact item in contactBusiness.Contacts)
                         {
-                            System.Console.WriteLine(item.FirstName);
-                            System.Console.WriteLine(item.LastName);
-                            System.Console.WriteLine(item.PhoneNumber);
+                            Console.WriteLine(item.FirstName);
+                            Console.WriteLine(item.LastName);
+                            Console.WriteLine(item.PhoneNumber);
+                            Console.WriteLine("");
                         }
 
                         break;
 
                     case 3:
 
-                        System.Console.WriteLine("Enter UserId");
+                        Console.WriteLine("Enter ContactId");
 
                         var uId = Convert.ToInt32(Console.ReadLine());
 
                         try
                         {
-                            userBusiness.DeleteUser(uId);
+                            contactBusiness.DeleteContact(uId);
 
-                            System.Console.WriteLine("User Deleted Successfully");
+                            Console.WriteLine("Contact Deleted Successfully");
                         }
                         catch
                         {
-                            System.Console.WriteLine("Error ! Couldn't Delete");
+                            Console.WriteLine("Error ! Couldn't Delete");
                         }
 
                         break;
 
                     case 4:
 
-                        System.Console.WriteLine("Enter UserId");
-
-                        uId = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter ContactId");
 
                         try
                         {
-                            System.Console.WriteLine("Enter FirstName");
+                            uId = Convert.ToInt32(Console.ReadLine());
+
+                            Console.WriteLine("Enter FirstName");
+
                             var value = Console.ReadLine();
+
                             if(value != "")
-                            userBusiness.Users[uId].FirstName = value;
+                            contactBusiness.Contacts[uId].FirstName = value;
 
 
-                            System.Console.WriteLine("Enter LastName");
+                            Console.WriteLine("Enter LastName");
+
                             value = Console.ReadLine();
-                            if(value != "")
-                            userBusiness.Users[uId].FirstName = value;
 
-                            System.Console.WriteLine("Enter PhoneNumber");
+                            if(value != "")
+                            contactBusiness.Contacts[uId].LastName = value;
+
+                            Console.WriteLine("Enter PhoneNumber");
+
                             value = Console.ReadLine();
+
                             if(value != "")
-                            userBusiness.Users[uId].FirstName = value;
+                            contactBusiness.Contacts[uId].PhoneNumber = value;
 
-                            System.Console.WriteLine("User Updated Successfully");
-
+                            Console.WriteLine("Contact Updated Successfully");
                         }
                         catch
                         {
-                            System.Console.WriteLine("Error! Couldn't Update");
+                            Console.WriteLine("Error! Couldn't Update");
                         }
+
+                        break;
+
+                    default:
+
+                        Console.WriteLine("Invalid Operation");
 
                         break;
                 }
 
-                System.Console.WriteLine("For Exit Press 'E'");
+                Console.WriteLine("For Exit Press 'E'");
 
                 exit = Console.ReadLine();
             }
