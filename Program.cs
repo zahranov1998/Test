@@ -1,39 +1,12 @@
-﻿using System.Text.Json;
-
-namespace Sample
+﻿namespace Sample
 {
     class Program
     {
         static void Main(string[] args)
         {
-
-            string f = AppDomain.CurrentDomain.BaseDirectory;
-
-            var path = f + "Files\\Data.json";
-
-            var contactBusiness = new ContactBusiness();
-
-            StreamReader sr = new StreamReader(path);
-
-            var z = sr.ReadToEnd();
-
-            sr.Dispose();
-
-            List<Contact> contacts = new List<Contact>();
-
+             var contactBusiness = new ContactBusiness();
 
             Contact contact = new Contact();
-
-            if (string.IsNullOrEmpty(z) == false)
-            {
-                contacts = JsonSerializer.Deserialize<List<Contact>>(z);
-            }
-
-            contactBusiness.Contacts = contacts;
-
-            var opt = new JsonSerializerOptions() { WriteIndented = true };
-
-            var strJson = JsonSerializer.Serialize<List<Contact>>(contactBusiness.Contacts, opt);
 
             var exit = "";
 
@@ -66,45 +39,17 @@ namespace Sample
                         Console.WriteLine("Enter PhoneNumber");
                         contact.PhoneNumber = Console.ReadLine();
 
-                        contacts.Add(contact);
-
-                        strJson = JsonSerializer.Serialize<IList<Contact>>(contacts, opt);
-
-
-                        StreamWriter streamWriter = new StreamWriter(path, false);
-
-                        streamWriter.WriteLine(strJson);
-
-                        streamWriter.Dispose();
-
-                        Console.WriteLine("Contact Added Successfully");
+                        contactBusiness.AddContact(contact);
 
                         break;
 
-                    case 2:
+                   case 2:
 
-                        sr = new StreamReader(path);
-
-                        z = sr.ReadToEnd();
-
-                        sr.Dispose();
-
-                        Console.WriteLine(z);
+                        contactBusiness.ShowContact();
 
                         break;
 
                     case 3:
-
-                        sr = new StreamReader(path);
-
-                        z = sr.ReadToEnd();
-
-                        sr.Dispose();
-
-                        if (string.IsNullOrEmpty(z) == false)
-                        {
-                            contacts = JsonSerializer.Deserialize<List<Contact>>(z);
-                        }
 
                         Console.WriteLine("Enter ContactId");
 
@@ -112,15 +57,7 @@ namespace Sample
 
                         try
                         {
-                            contacts.Remove(contacts[uId]);
-
-                            strJson = JsonSerializer.Serialize<IList<Contact>>(contacts, opt);
-
-                            streamWriter = new StreamWriter(path, false);
-
-                            streamWriter.WriteLine(strJson);
-
-                            streamWriter.Dispose();
+                            contactBusiness.DeleteContact(uId);
 
                             Console.WriteLine("Contact Deleted Successfully");
                         }
@@ -140,34 +77,15 @@ namespace Sample
                             uId = Convert.ToInt32(Console.ReadLine());
 
                             Console.WriteLine("Enter FirstName");
-
-                            var value = Console.ReadLine();
-
-                            if (value != "")
-                                contacts[uId].FirstName = value;
-
+                            contact.FirstName = Console.ReadLine();
 
                             Console.WriteLine("Enter LastName");
-
-                            value = Console.ReadLine();
-
-                            if (value != "")
-                                contacts[uId].LastName = value;
+                            contact.LastName = Console.ReadLine();
 
                             Console.WriteLine("Enter PhoneNumber");
+                            contact.PhoneNumber = Console.ReadLine();
 
-                            value = Console.ReadLine();
-
-                            if (value != "")
-                                contacts[uId].PhoneNumber = value;
-
-                            strJson = JsonSerializer.Serialize<IList<Contact>>(contacts, opt);
-
-                            streamWriter = new StreamWriter(path, false);
-
-                            streamWriter.WriteLine(strJson);
-
-                            streamWriter.Dispose();
+                            contactBusiness.UpdateContact(uId , contact);
 
                             Console.WriteLine("Contact Updated Successfully");
                         }
