@@ -4,18 +4,35 @@
     {
         static void Main(string[] args)
         {
-             var contactBusiness = new ContactBusiness();
+            ContactBusiness contactBusiness;
 
             Contact contact = new Contact();
 
             var exit = "";
 
+            Console.WriteLine("For Creating New File Press 1 And For Accesing The Main File Press Any Keys");
+
+            var s = Console.ReadLine();
+
+            if (s == "1")
+            {
+                Console.WriteLine("Enter Your File Name");
+
+                var path = Directory.GetCurrentDirectory() + $"\\{Console.ReadLine()}.txt";
+
+                contactBusiness = new ContactBusiness(path);
+            }
+            else
+            {
+                contactBusiness = new ContactBusiness();
+            }
 
             while (exit.ToLower() != "e")
             {
                 Console.WriteLine("Select The Oparation : \n 1.Add Contact \n 2.Show Contacts \n 3.Delete Contact \n 4.Update Contact");
 
                 var a = 0;
+
                 try
                 {
                     a = Convert.ToInt32(Console.ReadLine());
@@ -43,7 +60,7 @@
 
                         break;
 
-                   case 2:
+                    case 2:
 
                         contactBusiness.ShowContact();
 
@@ -58,8 +75,6 @@
                         try
                         {
                             contactBusiness.DeleteContact(uId);
-
-                            Console.WriteLine("Contact Deleted Successfully");
                         }
                         catch
                         {
@@ -85,9 +100,7 @@
                             Console.WriteLine("Enter PhoneNumber");
                             contact.PhoneNumber = Console.ReadLine();
 
-                            contactBusiness.UpdateContact(uId , contact);
-
-                            Console.WriteLine("Contact Updated Successfully");
+                            contactBusiness.UpdateContact(uId, contact);
                         }
                         catch
                         {
