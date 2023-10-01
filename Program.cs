@@ -10,7 +10,7 @@
 
             var exit = "";
 
-            Console.WriteLine("For Creating New File Press 1 And For Accesing The Main File Press Any Keys");
+            Console.WriteLine("For Creating New File Press 1 Else Press Any Keys");
 
             var s = Console.ReadLine();
 
@@ -62,7 +62,7 @@
 
                     case 2:
 
-                        contactBusiness.ShowContact();
+                        contactBusiness.ShowContacts();
 
                         break;
 
@@ -70,10 +70,13 @@
 
                         Console.WriteLine("Enter ContactId");
 
-                        var uId = Convert.ToInt32(Console.ReadLine());
-
                         try
                         {
+                            var uId = Convert.ToInt32(Console.ReadLine());
+
+                            if (contactBusiness.ContactExist(uId) == false)
+                                throw new Exception();
+
                             contactBusiness.DeleteContact(uId);
                         }
                         catch
@@ -89,7 +92,11 @@
 
                         try
                         {
-                            uId = Convert.ToInt32(Console.ReadLine());
+                            var uId = Convert.ToInt32(Console.ReadLine());
+
+                            if (contactBusiness.ContactExist(uId) == false)
+                                throw new Exception();
+
 
                             Console.WriteLine("Enter FirstName");
                             contact.FirstName = Console.ReadLine();

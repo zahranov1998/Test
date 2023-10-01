@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XFWOa74jtChK6TTDYxAmWZpxYYxhgmUgACJCIhhfyYVoqZhlVjJHoFHtpW54rl9y8ZbHBVOgX09rGznnYvI11Q==",
+  "dgSpecHash": "eica1njohtTkCxH5hY2RvYSxWryWomToiuXYP4Y+HE2BcFSsl/sXuixgHLoRXAZzCzQG7qjy+NzfdoMhhAirNg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\z.mohammadi\\Source\\Repos\\Test\\Sample.csproj",
+  "projectFilePath": "C:\\Users\\z.mohammadi\\source\\repos\\Test\\Sample.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
