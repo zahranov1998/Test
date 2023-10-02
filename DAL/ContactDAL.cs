@@ -62,19 +62,6 @@ namespace Sample.DAL
 
         public void Update(int id, Contact contact)
         {
-            //_streamReader = new StreamReader(_path);
-
-            //_data = _streamReader.ReadToEnd();
-
-            //_streamReader.Dispose();
-
-            //if (string.IsNullOrEmpty(_data) == false)
-            //{
-            //    Contacts = JsonSerializer.Deserialize<List<Contact>>(_data);
-            //}
-
-            ////------------------
-
             var strJson = JsonSerializer.Serialize<List<Contact>>(Contacts);
 
             _streamWriter = new StreamWriter(_path, false);

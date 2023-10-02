@@ -10,15 +10,11 @@ public class ContactBusiness
     public ContactBusiness(string path)
     {
         _contactDAL = new ContactDAL(path);
-
-     //   _contacts = _contactDAL.Contacts;
     }
 
     public ContactBusiness()
     {
         _contactDAL = new ContactDAL();
-
-      //  _contacts = _contactDAL.Contacts;
     }
 
     public void AddContact(Contact contact)

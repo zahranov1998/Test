@@ -12,3 +12,18 @@ C:\Users\z.mohammadi\Source\Repos\Test\obj\Debug\net7.0\refint\Sample.dll
 C:\Users\z.mohammadi\Source\Repos\Test\obj\Debug\net7.0\Sample.pdb
 C:\Users\z.mohammadi\Source\Repos\Test\obj\Debug\net7.0\Sample.genruntimeconfig.cache
 C:\Users\z.mohammadi\Source\Repos\Test\obj\Debug\net7.0\ref\Sample.dll
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\Sample.csproj.AssemblyReference.cache
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\Sample.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\Sample.AssemblyInfoInputs.cache
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\Sample.AssemblyInfo.cs
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\Sample.csproj.CoreCompileInputs.cache
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\Sample.dll
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\refint\Sample.dll
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\Sample.pdb
+C:\Users\Zahra\Desktop\New folder\bin\Debug\net7.0\Sample.exe
+C:\Users\Zahra\Desktop\New folder\bin\Debug\net7.0\Sample.deps.json
+C:\Users\Zahra\Desktop\New folder\bin\Debug\net7.0\Sample.runtimeconfig.json
+C:\Users\Zahra\Desktop\New folder\bin\Debug\net7.0\Sample.dll
+C:\Users\Zahra\Desktop\New folder\bin\Debug\net7.0\Sample.pdb
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\Sample.genruntimeconfig.cache
+C:\Users\Zahra\Desktop\New folder\obj\Debug\net7.0\ref\Sample.dll
